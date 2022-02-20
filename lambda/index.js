@@ -3,6 +3,15 @@ const AWS = require('aws-sdk');
 const Util = require('./util.js');
 const https = require('https');
 
+const PODCAST_URLS = ['https://threads.out.airtime.pro/threads_b', 'https://threads2.out.airtime.pro/threads2_b'];
+const PUBLIC_STATUS = [
+  'https://threads.airtime.pro/api/live-info-v2',
+  'https://threads2.airtime.pro/api/live-info-v2',
+];
+const STATION_NAME = "Threads";
+const CHANNELS = ["Channel One", "Channel Two"];
+const WEBSITE = "threadsradio.com";
+const STATION_SLUG = "threadsradio"
 
 async function getReq(url) {
   return new Promise ((resolve, reject) => {
@@ -72,7 +81,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome to Threads. Which channel would you like to listen? Or would you prefer asking who is playing?';
+        const speakOutput = `Welcome to ${STATION_NAME}. Which channel would you like to listen? Or would you prefer asking who is playing?`;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -100,12 +109,9 @@ const PlayAudioIntentHandler = {
         } catch (e) {
             channel = 0
         }
-        console.log("channel", channel)
+
         const playbackInfo = await getPlaybackInfo();
-        
-        console.log("playbackInfo", playbackInfo)
         const playBehavior = 'REPLACE_ALL';
-        const podcastUrls = ['https://threads.out.airtime.pro/threads_b', 'https://threads2.out.airtime.pro/threads2_b'];
         
         if (playbackInfo[channel] === "Nothing") {
             const sorry = "Sorry, but this channel is currently playing nothing. Which channel would you like to listen?"
@@ -120,7 +126,7 @@ const PlayAudioIntentHandler = {
             .speak(speakOutput)
             .addAudioPlayerPlayDirective(
                 playBehavior,
-                podcastUrls[channel],
+                PODCAST_URLS[channel],
                 playbackInfo[channel],
                 0,
                 null
@@ -138,7 +144,6 @@ const ChannelOnePlayAudioIntentHandler = {
         let channel = 0
         const playbackInfo = await getPlaybackInfo();
         const playBehavior = 'REPLACE_ALL';
-        const podcastUrls = ['https://threads.out.airtime.pro/threads_b', 'https://threads2.out.airtime.pro/threads2_b'];
         
         const speakOutput = 'Connecting the dots. Now listening to: ' + playbackInfo[channel] + ".";
         
@@ -154,7 +159,7 @@ const ChannelOnePlayAudioIntentHandler = {
             .speak(speakOutput)
             .addAudioPlayerPlayDirective(
                 playBehavior,
-                podcastUrls[channel],
+                PODCAST_URLS[channel],
                 playbackInfo[channel],
                 0,
                 null
@@ -172,7 +177,6 @@ const ChannelTwoPlayAudioIntentHandler = {
         let channel = 1
         const playbackInfo = await getPlaybackInfo();
         const playBehavior = 'REPLACE_ALL';
-        const podcastUrls = ['https://threads.out.airtime.pro/threads_b', 'https://threads2.out.airtime.pro/threads2_b'];
         
         const speakOutput = 'Connecting the dots. Now listening to: ' + playbackInfo[channel] + ".";
         
@@ -189,7 +193,7 @@ const ChannelTwoPlayAudioIntentHandler = {
             .speak(speakOutput)
             .addAudioPlayerPlayDirective(
                 playBehavior,
-                podcastUrls[channel],
+                PODCAST_URLS[channel],
                 playbackInfo[channel],
                 0,
                 null
@@ -221,7 +225,7 @@ const SwitchChannelIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SwitchChannelIntent';
     },
     async handle(handlerInput) {
-        const channels = ["Channel One", "Channel Two"];
+        const channels = CHANNELS;
      
         let channel;
         try {
@@ -232,7 +236,6 @@ const SwitchChannelIntentHandler = {
         }
         const playbackInfo = await getPlaybackInfo();
         const playBehavior = 'REPLACE_ALL';
-        const podcastUrls = ['https://threads.out.airtime.pro/threads_b', 'https://threads2.out.airtime.pro/threads2_b'];
         
         if (playbackInfo[channel] === "Nothing") {
             const sorry = `Sorry, but ${channels[channel]} is currently playing nothing. Which channel would you like to listen?`
@@ -246,7 +249,7 @@ const SwitchChannelIntentHandler = {
             .speak(speakOutput)
             .addAudioPlayerPlayDirective(
                 playBehavior,
-                podcastUrls[channel],
+                PODCAST_URLS[channel],
                 playbackInfo[channel],
                 0,
                 null
@@ -262,9 +265,9 @@ const WhatsPlayingIntentHandler = {
     },
     async handle(handlerInput) {
         const playbackInfo = await getPlaybackInfo();
-        const preliminary = "In Threads, "
-        const speak1 = playbackInfo[0] === 'Nothing' ? "Channel one is currently playing nothing. " : `we're streaming on channel one: ${playbackInfo[0]}. `;
-        const speak2 = playbackInfo[1] === 'Nothing' ? "Channel two is currently playing nothing. " : `On channel two, now is playing: ${playbackInfo[1]}. `;
+        const preliminary = `In ${STATION_NAME}, `
+        const speak1 = playbackInfo[0] === 'Nothing' ? `${CHANNELS[0]} is currently playing nothing. ` : `we're streaming on ${CHANNELS[0]}: ${playbackInfo[0]}. `;
+        const speak2 = playbackInfo[1] === 'Nothing' ? `${CHANNELS[1]} is currently playing nothing. ` : `On ${CHANNELS[1]}, now is playing: ${playbackInfo[1]}. `;
         const prompt = "What channel would you like to listen?"
         
         const speakOutput = preliminary + speak1 + speak2 + prompt;
@@ -298,7 +301,7 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Farewell! Visit threadsradio.com for more.';
+        const speakOutput = `Farewell! Visit ${WEBSITE} for more.`;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -373,7 +376,6 @@ const PlaybackControllerHandler = {
     }
     const playbackInfo = await getPlaybackInfo();
     const playBehavior = 'REPLACE_ALL';
-    const podcastUrls = ['https://threads.out.airtime.pro/threads_b', 'https://threads2.out.airtime.pro/threads2_b'];
     const playbackControllerEventName = handlerInput.requestEnvelope.request.type.split('.')[1];
     let response;
     switch (playbackControllerEventName) {
@@ -381,7 +383,7 @@ const PlaybackControllerHandler = {
         response = handlerInput.responseBuilder
             .addAudioPlayerPlayDirective(
                 playBehavior,
-                podcastUrls[channel],
+                PODCAST_URLS[channel],
                 playbackInfo[channel],
                 0,
                 null
@@ -526,11 +528,6 @@ const unescapeHTML = (safe) => {
 }
 
 async function getPlaybackInfo(who = 0) {
-  const publicStatus = [
-    'https://threads.airtime.pro/api/live-info-v2',
-    'https://threads2.airtime.pro/api/live-info-v2',
-  ];
-
   let promises = [];
   
   const createPromise = (url) => new Promise(async (resolve, reject) => {
@@ -542,8 +539,8 @@ async function getPlaybackInfo(who = 0) {
     }
   })
 
-  promises.push(createPromise(publicStatus[0]));
-  promises.push(createPromise(publicStatus[1]));
+  promises.push(createPromise(PUBLIC_STATUS[0]));
+  promises.push(createPromise(PUBLIC_STATUS[1]));
   
   const [response1, response2] = await Promise.allSettled(promises)
 
@@ -609,5 +606,5 @@ exports.handler = Alexa.SkillBuilders.custom()
         IntentReflectorHandler)
     .addErrorHandlers(
         ErrorHandler)
-    .withCustomUserAgent('threadsradio/v1')
+    .withCustomUserAgent(`${STATION_SLUG}/v1`)
     .lambda();
