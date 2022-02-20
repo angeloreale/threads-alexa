@@ -549,42 +549,38 @@ async function getPlaybackInfo(who = 0) {
 
   let response = {}
     
-    try {
-        let show = undefined
-        if (response1.value.station) {
-            try { 
-                show = response1.value.shows.current.name
-            } catch (e) {
-                show = "Nothing"
-            }
-            response[0] = unescapeHTML(show)
-        } else {
-            response[0] = "a stream that was not identified in time by Alexa."
-        }
-    } catch(e) {
-        response[0] = "a stream that was not identified in time by Alexa."
-        console.log(e)
+  try {
+    let show = undefined
+    if (response1.value.station && response1.value.shows.current.name) {
+      show = response1.value.shows.current.name
+      response[0] = unescapeHTML(show)
+    } else if (response1.value.station) {
+      response[0] = "Nothing"
+    } else {
+      response[0] = "a stream that was not identified in time by Alexa."
     }
-    
-    try {
-        let show = undefined
-        if (response2.value.station) {
-            try { 
-                show = response2.value.shows.current.name
-            } catch (e) {
-                show = "Nothing"
-            }
-            response[1] = unescapeHTML(show)
-        } else {
-            response[1] = "a stream that was not identified in time by Alexa."
-        }
-    } catch(e) {
-        response[1] = "a stream that was not identified in time by Alexa."
-        console.log(e)
+  } catch (e) {
+    response[0] = "a stream that was not identified in time by Alexa."
+    console.log(e)
+  }
+
+  try {
+    let show = undefined
+    if (response2.value.station && response2.value.shows.current.name) {
+      show = response2.value.shows.current.name
+      response[1] = unescapeHTML(show)
+    } else if (response2.value.station) {
+      response[1] = "Nothing"
+    } else {
+      response[1] = "a stream that was not identified in time by Alexa."
     }
+  } catch (e) {
+    response[1] = "a stream that was not identified in time by Alexa."
+    console.log(e)
+  }
 
     
-    return response
+  return response
 }
 
 

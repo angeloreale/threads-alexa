@@ -1,7 +1,7 @@
 const https = require("https")
 
 async function getReq(url) {
-  return new Promise ((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const req = https.get(url, res => {
       let rawData = '';
 
@@ -29,12 +29,12 @@ async function getReq(url) {
 }
 
 const fn = async (url) => new Promise(async (resolve, reject) => {
-    try {
-      const answer = await getReq(url);
-      resolve(answer);
-    } catch (e) {
-      reject();
-    }
+  try {
+    const answer = await getReq(url);
+    resolve(answer);
+  } catch (e) {
+    reject();
+  }
 });
 
 const timeout = async (url) => {
@@ -59,11 +59,11 @@ const getRequest = async (url) => new Promise(async (resolve, reject) => {
 
 const unescapeHTML = (safe) => {
   return safe.replace(/&amp;/g, '&')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"')
-      .replace(/&#039;/g, "'")
-      .replace(/\(R\)/g, "from Repeats");
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/\(R\)/g, "from Repeats");
 }
 
 async function getPlaybackInfo(who = 0) {
@@ -73,7 +73,7 @@ async function getPlaybackInfo(who = 0) {
   ];
 
   let promises = [];
-  
+
   const createPromise = (url) => new Promise(async (resolve, reject) => {
     try {
       const answer = await getRequest(url)
@@ -85,47 +85,43 @@ async function getPlaybackInfo(who = 0) {
 
   promises.push(createPromise(publicStatus[0]));
   promises.push(createPromise(publicStatus[1]));
-  
+
   const [response1, response2] = await Promise.allSettled(promises)
 
   let response = {}
-    
-    try {
-        let show = undefined
-        if (response1.value.station) {
-            try { 
-                show = response1.value.shows.current.name
-            } catch (e) {
-                show = "Nothing"
-            }
-            response[0] = unescapeHTML(show)
-        } else {
-            response[0] = "a stream that was not identified in time by Alexa."
-        }
-    } catch(e) {
-        response[0] = "a stream that was not identified in time by Alexa."
-        console.log(e)
-    }
-    
-    try {
-        let show = undefined
-        if (response2.value.station) {
-            try { 
-                show = response2.value.shows.current.name
-            } catch (e) {
-                show = "Nothing"
-            }
-            response[1] = unescapeHTML(show)
-        } else {
-            response[1] = "a stream that was not identified in time by Alexa."
-        }
-    } catch(e) {
-        response[1] = "a stream that was not identified in time by Alexa."
-        console.log(e)
-    }
 
-    
-    return response
+  try {
+    let show = undefined
+    if (response1.value.station && response1.value.shows.current.name) {
+      show = response1.value.shows.current.name
+      response[0] = unescapeHTML(show)
+    } else if (response1.value.station) {
+      response[0] = "Nothing"
+    } else {
+      response[0] = "a stream that was not identified in time by Alexa."
+    }
+  } catch (e) {
+    response[0] = "a stream that was not identified in time by Alexa."
+    console.log(e)
+  }
+
+  try {
+    let show = undefined
+    if (response2.value.station && response2.value.shows.current.name) {
+      show = response2.value.shows.current.name
+      response[1] = unescapeHTML(show)
+    } else if (response2.value.station) {
+      response[1] = "Nothing"
+    } else {
+      response[1] = "a stream that was not identified in time by Alexa."
+    }
+  } catch (e) {
+    response[1] = "a stream that was not identified in time by Alexa."
+    console.log(e)
+  }
+
+
+  return response
 }
 
 const getThreadsData = async () => {
