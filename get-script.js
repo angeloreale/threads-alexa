@@ -85,7 +85,7 @@ function unescapeHTML(safe) {
 }
 
 async function getPlaybackInfo(who = 0) {
-  let promises = [];
+  const promises = [];
 
   const createPromise = (url) => new Promise(async (resolve, reject) => {
     try {
@@ -101,14 +101,13 @@ async function getPlaybackInfo(who = 0) {
 
   const [response1, response2] = await Promise.allSettled(promises)
 
-  let response = {}
+  const response = {}
 
   try {
-    let show = undefined
     if (response1.value && response1.value.station && response1.value.shows.current.name) {
-      show = response1.value.shows.current.name
+      const show = response1.value.shows.current.name
       response[0] = unescapeHTML(show)
-    } else if (response1.value.station) {
+    } else if (response1.value && response1.value.station) {
       response[0] = "Nothing"
     } else {
       response[0] = "a stream that was not identified in time by Alexa."
@@ -119,11 +118,10 @@ async function getPlaybackInfo(who = 0) {
   }
 
   try {
-    let show = undefined
     if (response2.value && response2.value.station && response2.value.shows.current.name) {
-      show = response2.value.shows.current.name
+      const show = response2.value.shows.current.name
       response[1] = unescapeHTML(show)
-    } else if (response2.value.station) {
+    } else if (response2.value && response2.value.station) {
       response[1] = "Nothing"
     } else {
       response[1] = "a stream that was not identified in time by Alexa."
