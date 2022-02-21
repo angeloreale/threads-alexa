@@ -466,7 +466,7 @@ const ErrorHandler = {
 /**
  * Kinda facade for an impatient get request.
  */
- async function getRequestWithin(url, wait) {
+async function getRequestWithin(url, wait) {
   return new Promise((resolve, reject) => {
     const cancel = setTimeout(async () => {
       req.destroy("TIME_OUT");
@@ -556,7 +556,7 @@ async function getPlaybackInfo(who = 0) {
     } catch (e) {
       response[0] = "a stream that was not identified in time by Alexa.";
       console.log(e);
-    } 
+    }
     try {
       if (response2.value && response2.value.station && response2.value.shows.current.name) {
         const show = response2.value.shows.current.name;
