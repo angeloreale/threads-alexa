@@ -12,8 +12,11 @@ const STATION_SLUG = "threadsradio";
 
 const MAX_WAIT = 2000;
 
-async function getReq(url) {
+async function getRequest(url, wait) {
   return new Promise((resolve, reject) => {
+    const cancel = setTimeout(async () => {
+      reject();
+    }, wait);
     const req = https.get(url, res => {
       let rawData = '';
 
@@ -23,49 +26,19 @@ async function getReq(url) {
 
       res.on('end', async () => {
         try {
+          clearTimeout(cancel)
           resolve(JSON.parse(rawData));
         } catch (err) {
+          clearTimeout(cancel)
           reject();
         }
       });
     });
 
     req.on('error', err => {
+      clearTimeout(cancel)
       reject();
     });
-  })
-}
-
-async function fn(url) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const answer = await getReq(url);
-      resolve(answer);
-    } catch (e) {
-      reject();
-    }
-  });
-}
-
-async function maxWaitReq(url, wait) {
-  return new Promise(async (resolve, reject) => {
-    const cancel = setTimeout(async () => {
-      reject();
-    }, wait);
-    const answer = await fn(url)
-    clearTimeout(cancel)
-    resolve(answer)
-  })
-}
-
-async function getRequest(url) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const answer = await maxWaitReq(url, MAX_WAIT);
-      resolve(answer);
-    } catch (e) {
-      reject();
-    }
   })
 }
 
@@ -89,7 +62,7 @@ async function getPlaybackInfo(who = 0) {
 
   const createPromise = (url) => new Promise(async (resolve, reject) => {
     try {
-      const answer = await getRequest(url)
+      const answer = await getRequest(url, MAX_WAIT)
       resolve(answer)
     } catch (e) {
       reject()
