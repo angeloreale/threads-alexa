@@ -529,6 +529,9 @@ async function getPlaybackInfo(who = 0) {
   const promises = [];
 
   const createPromise = (url) => new Promise(async (resolve, reject) => {
+    const cancel = setTimeout(() => {
+      reject();
+    }, 1.2 * MAX_WAIT)
     try {
       const answer = await getRequestWithin(url, MAX_WAIT);
       resolve(answer);
