@@ -1,0 +1,165 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-CA": {
+          "summary": "Lock into Threads - FOR THE CULTURE",
+          "examplePhrases": [
+            "Alexa, open Threads Radio.",
+            "What\u0027s playing?",
+            "Tune to global channel."
+          ],
+          "keywords": [
+            "threads",
+            "radio",
+            "threads",
+            "radio",
+            "electronic",
+            "london",
+            "radio"
+          ],
+          "name": "Threads Radio",
+          "description": "Threads is a radio station and international broadcast platform connecting local communities across the world and empowering people to express themselves through music, discussion and art.\n\n\nThreads began in January 2019, with our studio based above The Cause nightclub in Tottenham. Threads broadcasts live from London seven days a week, alongside our second channel Threads* which features our family of hosts located in cities all around the world.\n\nWe showcase over 350 unique shows every month, bringing you topical discussion and music of all genres from our community of international artists and creators.\n\nYou can listen live to our two channels Threads and Threads* by using the app, all with no ads and absolutely free.\n\n\nLock into Threads - FOR THE CULTURE",
+          "smallIconUri": "file://assets/images/en-CA_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-CA_largeIconUri.png"
+        },
+        "en-US": {
+          "summary": "Lock into Threads - FOR THE CULTURE",
+          "examplePhrases": [
+            "Alexa, open Threads Radio.",
+            "What\u0027s playing?",
+            "Tune to global channel."
+          ],
+          "keywords": [
+            "threads",
+            "radio",
+            "threads",
+            "radio",
+            "electronic",
+            "london",
+            "radio"
+          ],
+          "name": "Threads Radio",
+          "description": "Threads is a radio station and international broadcast platform connecting local communities across the world and empowering people to express themselves through music, discussion and art.\n\n\nThreads began in January 2019, with our studio based above The Cause nightclub in Tottenham. Threads broadcasts live from London seven days a week, alongside our second channel Threads* which features our family of hosts located in cities all around the world.\n\nWe showcase over 350 unique shows every month, bringing you topical discussion and music of all genres from our community of international artists and creators.\n\nYou can listen live to our two channels Threads and Threads* by using the app, all with no ads and absolutely free.\n\n\nLock into Threads - FOR THE CULTURE",
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        },
+        "en-IN": {
+          "summary": "Lock into Threads - FOR THE CULTURE",
+          "examplePhrases": [
+            "Alexa, open Threads Radio.",
+            "What\u0027s playing?",
+            "Tune to global channel."
+          ],
+          "keywords": [
+            "threads",
+            "radio",
+            "threads",
+            "radio",
+            "electronic",
+            "london",
+            "radio"
+          ],
+          "name": "Threads Radio",
+          "description": "Threads is a radio station and international broadcast platform connecting local communities across the world and empowering people to express themselves through music, discussion and art.\n\n\nThreads began in January 2019, with our studio based above The Cause nightclub in Tottenham. Threads broadcasts live from London seven days a week, alongside our second channel Threads* which features our family of hosts located in cities all around the world.\n\nWe showcase over 350 unique shows every month, bringing you topical discussion and music of all genres from our community of international artists and creators.\n\nYou can listen live to our two channels Threads and Threads* by using the app, all with no ads and absolutely free.\n\n\nLock into Threads - FOR THE CULTURE",
+          "smallIconUri": "file://assets/images/en-IN_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-IN_largeIconUri.png"
+        },
+        "en-AU": {
+          "summary": "Lock into Threads - FOR THE CULTURE",
+          "examplePhrases": [
+            "Alexa, open Threads Radio.",
+            "What\u0027s playing?",
+            "Tune to global channel."
+          ],
+          "keywords": [
+            "threads",
+            "radio",
+            "threads",
+            "radio",
+            "electronic",
+            "london",
+            "radio"
+          ],
+          "name": "Threads Radio",
+          "description": "Threads is a radio station and international broadcast platform connecting local communities across the world and empowering people to express themselves through music, discussion and art.\n\n\nThreads began in January 2019, with our studio based above The Cause nightclub in Tottenham. Threads broadcasts live from London seven days a week, alongside our second channel Threads* which features our family of hosts located in cities all around the world.\n\nWe showcase over 350 unique shows every month, bringing you topical discussion and music of all genres from our community of international artists and creators.\n\nYou can listen live to our two channels Threads and Threads* by using the app, all with no ads and absolutely free.\n\n\nLock into Threads - FOR THE CULTURE",
+          "smallIconUri": "file://assets/images/en-AU_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-AU_largeIconUri.png"
+        },
+        "en-GB": {
+          "summary": "Lock into Threads - FOR THE CULTURE",
+          "examplePhrases": [
+            "Alexa, open Threads Radio.",
+            "What\u0027s playing?",
+            "Tune to global channel."
+          ],
+          "keywords": [
+            "threads",
+            "radio",
+            "threads",
+            "radio",
+            "electronic",
+            "london",
+            "radio"
+          ],
+          "name": "Threads Radio",
+          "description": "Threads is a radio station and international broadcast platform connecting local communities across the world and empowering people to express themselves through music, discussion and art.\n\n\nThreads began in January 2019, with our studio based above The Cause nightclub in Tottenham. Threads broadcasts live from London seven days a week, alongside our second channel Threads* which features our family of hosts located in cities all around the world.\n\nWe showcase over 350 unique shows every month, bringing you topical discussion and music of all genres from our community of international artists and creators.\n\nYou can listen live to our two channels Threads and Threads* by using the app, all with no ads and absolutely free.\n\n\nLock into Threads - FOR THE CULTURE",
+          "smallIconUri": "file://assets/images/en-GB_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-GB_largeIconUri.png"
+        }
+      },
+      "automaticDistribution": {
+        "isActive": false
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Threads Radio Alexa Skill.",
+      "category": "CHILDRENS_RADIO",
+      "distributionMode": "PUBLIC",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:eu-west-1:028052308342:function:cae8411d-d122-47d6-81cc-86be5a5f1a2e:Release_0"
+        },
+        "interfaces": [
+          {
+            "type": "AUDIO_PLAYER"
+          }
+        ],
+        "regions": {
+          "EU": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:eu-west-1:028052308342:function:cae8411d-d122-47d6-81cc-86be5a5f1a2e:Release_0"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:028052308342:function:cae8411d-d122-47d6-81cc-86be5a5f1a2e:Release_0"
+            }
+          },
+          "FE": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-west-2:028052308342:function:cae8411d-d122-47d6-81cc-86be5a5f1a2e:Release_0"
+            }
+          }
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "locales": {
+        "en-CA": {},
+        "en-US": {},
+        "en-IN": {},
+        "en-AU": {},
+        "en-GB": {}
+      },
+      "containsAds": false,
+      "isExportCompliant": true,
+      "isChildDirected": false,
+      "usesPersonalInfo": false
+    }
+  }
+}
